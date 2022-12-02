@@ -150,7 +150,7 @@ class StartPage(tk.Frame):
             inside_but = tk.Button(self, text='Click Me !', image=self.image_in)
             inside_but.place(x=350, y=25)
             ttk.Label(self, text=str(os.path.basename(file_in)), font=SmFONT).place(x=350, y=400)
-            canvas.after(500,inside_images, file_path_in)
+            canvas.after(50000,inside_images, file_path_in)
 
         inside_images(INCAMDIR + '*')
 
@@ -172,7 +172,7 @@ class StartPage(tk.Frame):
             outside_but = tk.Button(self, text='Click Me !', image=self.image_out)
             outside_but.place(x=925, y=25)
             ttk.Label(self, text=str(os.path.basename(file_out)), font=SmFONT).place(x=950, y=400)
-            canvas.after(500,outside_images, file_path_out)
+            canvas.after(50000,outside_images, file_path_out)
 
         outside_images(OUTCAMDIR + '*')
 
@@ -271,11 +271,11 @@ class StartPage(tk.Frame):
                 obsres = ascii.read(file, format='no_header', data_start=0, delimiter=',',names=obs_col_names)
 
                 # return obsres
-                # print(obsres)
+                #print(obsres)
 
-                with open('check.txt', 'w') as filehandle:
-                    for listitem in obsres:
-                        filehandle.write('%s\n' % listitem)
+                #with open('check.txt', 'w') as filehandle:
+                #    for listitem in obsres:
+                 #       filehandle.write('%s\n' % listitem)
 
                 output_array = np.array(obsres)
                 for i in range(len(output_array)):
@@ -317,12 +317,13 @@ class StartPage(tk.Frame):
                     plt.title(title)
                     plt.xlabel(xlabel)
                     plt.ylabel(ylabel)
+                    plt.xticks(rotation=25)
                     try:
-                        os.mkdir('weather_plots')
+                        os.mkdir(f'{HOMEDIR}weather_plots')
                     except:
                         pass
                     fig.canvas.draw()
-                    plt.savefig(f'weather_plots/{title}.png')
+                    plt.savefig(f'{HOMEDIR}weather_plots/{title}.png')
                     fig.clear()
                     # FIx so not to many figures will be made
 
@@ -369,7 +370,7 @@ class StartPage(tk.Frame):
                 tk.Label(self, text=f'{astro_twi}', font=SmFONT).place(x=1300, y=905)
 
             create_labels()
-            canvas.after(15000, make_plots_and_labels, weather_data_location)
+            canvas.after(50000, make_plots_and_labels, weather_data_location)
 
         fig = plt.figure()
         make_plots_and_labels(weather_data_location)
@@ -471,7 +472,7 @@ class Page1(tk.Frame):
             #self.plot_5 = ImageTk.PhotoImage(plot_5)
             #tk.Button(self, text='Click Me !', image=self.plot_5).place(x=950, y=775)
 
-            canvas.after(500, weather_plots, file_path_in)
+            canvas.after(50000, weather_plots, file_path_in)
 
         weather_plots("C:\\Users\Ginkl\Documents\TrintyWork\weather_plots\\")
 
@@ -532,7 +533,7 @@ class Page2(tk.Frame):
             self.plot_4 = ImageTk.PhotoImage(plot_4)
             tk.Button(self, text='Click Me !', image=self.plot_4).place(x=925, y=500)
             '''
-            canvas.after(500, weather_plots, file_path_in)
+            canvas.after(50000, weather_plots, file_path_in)
 
         weather_plots("C:\\Users\Ginkl\Documents\TrintyWork\weather_plots\\")
 
