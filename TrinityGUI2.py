@@ -310,14 +310,15 @@ class StartPage(tk.Frame):
 
                 #print(date)
 
-                def plot_format(x, y, xlabel, ylabel, title, color,fig):
+                def plot_format(x, y, xlabel, ylabel, title, color,fig,thick=1):
 
 
-                    plt.plot(x, y, c=color)
+                    plt.plot(x, y, c=color,linewidth=thick)
                     plt.title(title)
                     plt.xlabel(xlabel)
                     plt.ylabel(ylabel)
                     plt.xticks(rotation=25)
+
                     try:
                         os.mkdir(f'{HOMEDIR}weather_plots')
                     except:
@@ -329,10 +330,10 @@ class StartPage(tk.Frame):
 
 
                 plot_format(date, wind_direction, 'Date', 'Wind Direction (Degrees)', 'Wind_direction_over_time',
-                            'green',fig)
+                            'green',fig,thick=0.1)
                 plot_format(date, tempature, 'Date', 'Tempature (Degrees)', 'Temperature_over_time', 'red',fig)
                 plot_format(date, humidity, 'Date', 'Humidity (Percent)', 'Humidity_over_time', 'blue',fig)
-                plot_format(date, wind_speed, 'Date', 'Wind Speed (units)', 'Wind_speed_over_time', 'purple',fig)
+                plot_format(date, wind_speed, 'Date', 'Wind Speed (units)', 'Wind_speed_over_time', 'purple',fig,thick=0.1)
                 plot_format(date, dew_point, 'Date', 'Dew Point (Degrees)', 'Dewpoint_over_time', 'orange',fig)
                 plot_format(date, pressure, 'Date', 'Pressure (units)', 'Pressure_over_time', 'pink',fig)
 
