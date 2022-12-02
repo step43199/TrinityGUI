@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import math
 import tkinter as tk
 from random import random
@@ -15,6 +17,11 @@ LARGEFONT = ("Verdana", 35,)
 MedFONT = ("Verdana", 25)
 SmFONT = ("Verdana", 15)
 
+HOMEDIR = "/home/mpotts32/"
+CAMDIR = HOMEDIR + "cams/"
+INCAMDIR = CAMDIR + "IN/"
+OUTCAMDIR = CAMDIR + "OUT/"
+WXDIR = HOMEDIR + "weather/"
 
 class tkinterApp(tk.Tk):
 
@@ -53,13 +60,7 @@ class tkinterApp(tk.Tk):
         frame = self.frames[cont]
         frame.tkraise()
 
-
 # first window frame startpage
-
-
-
-
-
 class StartPage(tk.Frame):
     def __init__(self, parent, controller):
         canvas = tk.Canvas()
@@ -130,10 +131,10 @@ class StartPage(tk.Frame):
             ttk.Label(self, text=str(os.path.basename(file_in)), font=SmFONT).place(x=350, y=400)
             canvas.after(500,inside_images, file_path_in)
 
-        inside_images("C:\\Users\Ginkl\Documents\TrintyWork\Cams\In\*")
+        inside_images(INCAMDIR + "*")
 
         def open_indoor_folder():
-            os.startfile(r'C:\Users\Ginkl\Documents\TrintyWork\Cams\In')
+            os.startfile(r'{0}'.format(INCAMDIR))
         ttk.Button(self, text="Indoor filepath", command=open_indoor_folder).place(x=700, y=400,height=50, width=150)
         # putting the grid in its place by using
         # grid
@@ -152,10 +153,10 @@ class StartPage(tk.Frame):
             ttk.Label(self, text=str(os.path.basename(file_out)), font=SmFONT).place(x=950, y=400)
             canvas.after(500,outside_images, file_path_out)
 
-        outside_images("C:\\Users\Ginkl\Documents\TrintyWork\Cams\Out\*")
+        outside_images(OUTCAMDIR + "*")
 
         def open_outdoor_folder():
-            os.startfile(r'C:\Users\Ginkl\Documents\TrintyWork\Cams\Out')
+            os.startfile(r'{0}'.format(OUTCAMDIR))
 
         ttk.Button(self, text="Outdoor filepath", command=open_outdoor_folder).place(x=1325, y=400, height=50, width=150)
 
@@ -223,7 +224,7 @@ class StartPage(tk.Frame):
         button2 = ttk.Button(self, text="Page 2",
                              command=lambda: controller.show_frame(Page2))
         button2.grid(row=2, column=1, padx=10, pady=10)
-        weather_data_location = 'weatherdata.txt'
+        weather_data_location = WXDIR
         def make_plots_and_labels(file):
 
             def weather_data(file):
@@ -303,7 +304,7 @@ class StartPage(tk.Frame):
                     except:
                         pass
                     fig.canvas.draw()
-                    plt.savefig(f'C:\\Users\\Ginkl\\Documents\\TrintyWork\\weather_plots\\{title}.png')
+                    plt.savefig(f'weather_plots/{title}.png')
                     fig.clear()
                     # FIx so not to many figures will be made
 
@@ -411,10 +412,10 @@ class Page1(tk.Frame):
 
             canvas.after(500, weather_plots, file_path_in)
 
-        weather_plots("C:\\Users\Ginkl\Documents\TrintyWork\weather_plots\\")
+        weather_plots("weather_plots/")
 
         def weather_plots_folder():
-            os.startfile(r'C:\\Users\Ginkl\Documents\TrintyWork\weather_plots')
+            os.startfile(r'weather_plots/')
 
         ttk.Button(self, text="Weather Plots File Path", command=weather_plots_folder).place(x=100, y=400, height=50, width=150)
 
