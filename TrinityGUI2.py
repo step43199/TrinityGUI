@@ -240,7 +240,7 @@ class StartPage(tk.Frame):
         #weather_data_location = 'weatherdata.txt'
 
         list_of_files = glob.glob(WXDIR + '*')  # * means all if need specific format then *.csv
-        latest_file = max(list_of_files, key=os.path.getctime)
+        latest_file = min(list_of_files, key=os.path.getctime)
         weather_data_location = latest_file
         print(latest_file)
         def make_plots_and_labels(file):
