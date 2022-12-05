@@ -16,19 +16,20 @@ LARGEFONT = ("Verdana", 35,)
 MedFONT = ("Verdana", 25)
 SmFONT = ("Verdana", 15)
 
+'''
 HOMEDIR = 'C:/Users/Ginkl/Documents/TrintyWork/'
 CAMDIR = HOMEDIR + "Cams/"
 INCAMDIR = CAMDIR + "In/"
 OUTCAMDIR = CAMDIR + "Out/"
 WXDIR = HOMEDIR + 'Weather_data/'
-
 '''
+
 HOMEDIR = "/home/mpotts32/"
 CAMDIR = HOMEDIR + "cams/"
 INCAMDIR = CAMDIR + "IN/"
 OUTCAMDIR = CAMDIR + "OUT/"
 WXDIR = HOMEDIR + "weather/"
-'''
+
 
 class popupWindow(object):
     def __init__(self, master):
@@ -542,6 +543,9 @@ class Page2(tk.Frame):
 
         def weather_plots_folder():
             os.startfile(r'C:\\Users\Ginkl\Documents\TrintyWork\weather_plots')
+
+def door_control(DIR):
+    os.system('ssh {0}@{1} -- "./uswitch.py -dir {2}"'.format(USER-NAME,REMOTE-HOST,DIR)) 
 
 
 # Driver Code
