@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import math
 import tkinter as tk
 from random import random
@@ -242,8 +244,8 @@ class StartPage(tk.Frame):
 
         #weather_data_location = 'weatherdata.txt'
 
-        list_of_files = glob.glob(WXDIR + '*')  # * means all if need specific format then *.csv
-        latest_file = min(list_of_files, key=os.path.getctime)
+        list_of_files = glob.glob(WXDIR + '*_*')  # * means all if need specific format then *.csv
+        latest_file = max(list_of_files, key=os.path.getctime)
         weather_data_location = latest_file
         print(latest_file)
         def make_plots_and_labels(file):
@@ -478,13 +480,12 @@ class Page1(tk.Frame):
 
             canvas.after(50000, weather_plots, file_path_in)
 
-        weather_plots("C:\\Users\Ginkl\Documents\TrintyWork\weather_plots\\")
+        weather_plots(f"{HOMEDIR}weather_plots/")
 
         def weather_plots_folder():
-            os.startfile(r'C:\\Users\Ginkl\Documents\TrintyWork\weather_plots')
+            os.startfile(f'{HOMEDIR}weather_plots/')
 
         ttk.Button(self, text="Weather Plots File Path", command=weather_plots_folder).place(x=100, y=400, height=50, width=150)
-
 
 
 
@@ -539,14 +540,13 @@ class Page2(tk.Frame):
             '''
             canvas.after(50000, weather_plots, file_path_in)
 
-        weather_plots("C:\\Users\Ginkl\Documents\TrintyWork\weather_plots\\")
+        weather_plots(f"{HOMEDIR}weather_plots/")
 
         def weather_plots_folder():
-            os.startfile(r'C:\\Users\Ginkl\Documents\TrintyWork\weather_plots')
+            os.startfile(f'{HOMEDIR}weather_plots/')
 
 def door_control(DIR):
     os.system('ssh {0}@{1} -- "./uswitch.py -dir {2}"'.format(USER-NAME,REMOTE-HOST,DIR)) 
-
 
 # Driver Code
 if __name__ == "__main__":
