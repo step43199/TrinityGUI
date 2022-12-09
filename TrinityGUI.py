@@ -336,11 +336,11 @@ class StartPage(tk.Frame):
 
                 plot_format(date, wind_direction, 'Date', 'Wind Direction (Degrees)', 'Wind_direction_over_time',
                             'green',fig,thick=0.1)
-                plot_format(date, tempature, 'Date', 'Tempature (Degrees)', 'Temperature_over_time', 'red',fig)
-                plot_format(date, humidity, 'Date', 'Humidity (Percent)', 'Humidity_over_time', 'blue',fig)
-                plot_format(date, wind_speed, 'Date', 'Wind Speed (m/s)', 'Wind_speed_over_time', 'purple',fig,thick=0.1)
-                plot_format(date, dew_point, 'Date', 'Dew Point (Degrees)', 'Dewpoint_over_time', 'orange',fig)
-                plot_format(date, pressure, 'Date', 'Pressure (hPa)', 'Pressure_over_time', 'pink',fig)
+                plot_format(date, tempature, 'Date', 'Temperature (Degrees)', 'Temperature', 'red',fig)
+                plot_format(date, humidity, 'Date', 'Humidity (Percent)', 'Humidity', 'blue',fig)
+                plot_format(date, wind_speed, 'Date', 'Wind Speed (m/s)', 'Wind_speed', 'purple',fig,thick=0.1)
+                plot_format(date, dew_point, 'Date', 'Dew Point (Degrees)', 'Dewpoint', 'orange',fig)
+                plot_format(date, pressure, 'Date', 'Pressure (hPa)', 'Pressure', 'pink',fig)
 
 
             save_plot_png(all_data)
