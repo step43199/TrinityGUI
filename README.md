@@ -11,7 +11,7 @@ The GUI for the Trinity Demonstrator Telescope
 ##### Installation to a new computer: ( compatable for windows and linux)
 ##### Place the TrinityGUI.py code where needed and be sure directories can be made then update the paths for
 ##### HOMEDIR,CAMDIR,INCAMDIR,OUTCAMDIR,WXDIR,WPDIR. Set the refresh rate. Then the location of the screen shot will need to be adjusted
-##### search in the code for "im = ImageGrab.grab(bbox=" and edit the 4 numbers in that line to get the correct location
+##### search in the code for "im = ImageGrab.grab(bbox=left_x,top_y,right_x,bottom_y" and edit the 4 numbers in that line to get the correct location
 ##### for the weather data. Make sure all the packages are install. This should be a complete installation
 #####
 ##### During Run:
