@@ -380,9 +380,8 @@ class StartPage(tk.Frame):
                 plot_format(date, dew_point, 'Date', 'Dew Point (Degrees)', 'Dewpoint_over_time', 'orange', fig)
                 plot_format(date, pressure, 'Date', 'Pressure (units)', 'Pressure_over_time', 'pink', fig)
 
-            fig = plt.figure(1)  # the one figure used to make all the weather data plots
             save_plot_png(all_data)  # run the plots
-            plt.close(fig)
+
             # updating variables to create the labels with the latest data point
 
             tempature = float(all_data[-1][14])
@@ -474,8 +473,6 @@ class StartPage(tk.Frame):
                 ax.add_patch(high_speed)
 
                 plt.savefig('wind_direction.png')
-                fig3.clear()  # clear the plot
-                fig3.clf()
 
             # runs the arrow plotting
             angle = wind_direction
@@ -506,7 +503,7 @@ class StartPage(tk.Frame):
             canvas.after(refresh_rate, make_plots_and_labels, weather_data_location) # refreshs the system after some time
 
         #################### End of Wind direction arrows ###################################
-
+        fig = plt.figure(1)  # the one figure used to make all the weather data plots
         make_plots_and_labels(weather_data_location) # Rund the plots and labels
 
         # takes a screenshot of part of the screen NO SET CORRECTLY AS IT WILL BE DIFFERENT ON THE GATECH COMPUTER
