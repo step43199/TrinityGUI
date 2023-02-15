@@ -347,7 +347,7 @@ class StartPage(tk.Frame):
                     temp = str(date_n_time[i])
                     date[i] = datetime.datetime.strptime(temp[:19], "%Y-%m-%dT%H:%M:%S")
 
-                # print(date)
+                print(date)
                 # a def to make the plot format for each weather plot
 
                 def plot_format(x, y, xlabel, ylabel, title, color, fig, thick=1):
@@ -356,12 +356,15 @@ class StartPage(tk.Frame):
                     plt.title(title)
                     plt.xlabel(xlabel)
                     plt.ylabel(ylabel)
-
                     try:
-                        plt.xticks(x[::5],rotation=25)
+                        plt.xticks(rotation = 25)
                     except:
-                        plt.xticks(x[::5])
-                    #plt.tight_layout(pad=2)
+
+                    #plt.xticks(x.to_pydatetime(),rotation=25)
+                        plt.xticks(x[::50000], rotation=25)
+
+                    #plt.locator_params(axis='x', nbins=3)
+
 
                     try:
                         os.mkdir(
@@ -649,7 +652,7 @@ class Page1(tk.Frame):
                             plt.title(title)
                             plt.xlabel(xlabel)
                             plt.ylabel(ylabel)
-                            plt.xticks(rotation=25)
+                            #plt.xticks(rotation=25)
 
                             try:
                                 os.mkdir(DATEDIR)
