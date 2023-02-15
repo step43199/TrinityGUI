@@ -38,7 +38,7 @@ import datetime
 from astropy.io import ascii
 import numpy as np
 import pickle
-import pyscreenshot as ImageGrab
+#import pyscreenshot as ImageGrab
 import sys
 import subprocess
 
@@ -296,18 +296,18 @@ class StartPage(tk.Frame):
         weather_button.place(x=1325, y=525, height=50, width=150)
 
         ##### Labels for the weather section ##########
-        tk.Label(self, text="Temperature Current:", font=SmFONT).place(x=925, y=635)
-        # tk.Label(self, text="Temperature Avg (1h):", font=SmFONT).place(x=925, y=605)
-        tk.Label(self, text="Wind Speed Current:", font=SmFONT).place(x=925, y=665)
-        # tk.Label(self, text="Wind Speed Avg (1h):", font=SmFONT).place(x=925, y=665)
-        tk.Label(self, text="Humidity Current:", font=SmFONT).place(x=925, y=695)
-        tk.Label(self, text="Pressure Current:", font=SmFONT).place(x=925, y=725)
-        tk.Label(self, text="Wind Direction:", font=SmFONT).place(x=925, y=755)
-        tk.Label(self, text="Dew Point", font=SmFONT).place(x=925, y=785)
-        tk.Label(self, text="Sunrise:", font=SmFONT).place(x=925, y=815)
-        tk.Label(self, text="Sunset:", font=SmFONT).place(x=925, y=845)
-        tk.Label(self, text="Civil Twilight:", font=SmFONT).place(x=925, y=875)
-        tk.Label(self, text="Astro Twilight:", font=SmFONT).place(x=925, y=905)
+        # tk.Label(self, text="Temperature Current:", font=SmFONT).place(x=925, y=635)
+        # # tk.Label(self, text="Temperature Avg (1h):", font=SmFONT).place(x=925, y=605)
+        # tk.Label(self, text="Wind Speed Current:", font=SmFONT).place(x=925, y=665)
+        # # tk.Label(self, text="Wind Speed Avg (1h):", font=SmFONT).place(x=925, y=665)
+        # tk.Label(self, text="Humidity Current:", font=SmFONT).place(x=925, y=695)
+        # tk.Label(self, text="Pressure Current:", font=SmFONT).place(x=925, y=725)
+        # tk.Label(self, text="Wind Direction:", font=SmFONT).place(x=925, y=755)
+        # tk.Label(self, text="Dew Point", font=SmFONT).place(x=925, y=785)
+        # tk.Label(self, text="Sunrise:", font=SmFONT).place(x=925, y=815)
+        # tk.Label(self, text="Sunset:", font=SmFONT).place(x=925, y=845)
+        # tk.Label(self, text="Civil Twilight:", font=SmFONT).place(x=925, y=875)
+        # tk.Label(self, text="Astro Twilight:", font=SmFONT).place(x=925, y=905)
 
         ####### Updating Labels from the weather station ###############
 
@@ -356,7 +356,12 @@ class StartPage(tk.Frame):
                     plt.title(title)
                     plt.xlabel(xlabel)
                     plt.ylabel(ylabel)
-                    plt.xticks(rotation=25)
+
+                    try:
+                        plt.xticks(x[::5],rotation=25)
+                    except:
+                        plt.xticks(x[::5])
+                    #plt.tight_layout(pad=2)
 
                     try:
                         os.mkdir(
@@ -380,8 +385,9 @@ class StartPage(tk.Frame):
                 plot_format(date, dew_point, 'Date', 'Dew Point (Degrees)', 'Dewpoint_over_time', 'orange', fig)
                 plot_format(date, pressure, 'Date', 'Pressure (units)', 'Pressure_over_time', 'pink', fig)
 
+            fig = plt.figure(1)  # the one figure used to make all the weather data plots
             save_plot_png(all_data)  # run the plots
-
+            plt.close(fig)
             # updating variables to create the labels with the latest data point
 
             tempature = float(all_data[-1][14])
@@ -398,22 +404,54 @@ class StartPage(tk.Frame):
 
             # makes the labels
             def create_labels():
-                date = datetime.datetime.strptime(date_n_time[:19], "%Y-%m-%dT%H:%M:%S")
+                # date = datetime.datetime.strptime(date_n_time[:19], "%Y-%m-%dT%H:%M:%S")
+                #
+                # tk.Label(self, text=f'{tempature}', font=SmFONT).place(x=1300, y=635)
+                # # tk.Label(self, text="Temperature Avg (1h):", font=SmFONT).place(x=925, y=605)
+                # tk.Label(self, text=f'{wind_speed}', font=SmFONT).place(x=1300, y=665)
+                # # tk.Label(self, text="Wind Speed Avg (1h):", font=SmFONT).place(x=925, y=665)
+                # tk.Label(self, text=f'{humidity}', font=SmFONT).place(x=1300, y=695)
+                # tk.Label(self, text=f'{pressure}', font=SmFONT).place(x=1300, y=725)
+                # tk.Label(self, text=f'{wind_direction}', font=SmFONT).place(x=1300, y=755)
+                # tk.Label(self, text=f'{dew_point}', font=SmFONT).place(x=1300, y=785)
+                # tk.Label(self, text=f'{sun_rise}', font=SmFONT).place(x=1300, y=815)
+                # tk.Label(self, text=f'{sun_set}', font=SmFONT).place(x=1300, y=845)
+                # tk.Label(self, text=f'{civil_twi}', font=SmFONT).place(x=1300, y=875)
+                # tk.Label(self, text=f'{astro_twi}', font=SmFONT).place(x=1300, y=905)
 
-                tk.Label(self, text=f'{tempature}', font=SmFONT).place(x=1300, y=635)
-                # tk.Label(self, text="Temperature Avg (1h):", font=SmFONT).place(x=925, y=605)
-                tk.Label(self, text=f'{wind_speed}', font=SmFONT).place(x=1300, y=665)
-                # tk.Label(self, text="Wind Speed Avg (1h):", font=SmFONT).place(x=925, y=665)
-                tk.Label(self, text=f'{humidity}', font=SmFONT).place(x=1300, y=695)
-                tk.Label(self, text=f'{pressure}', font=SmFONT).place(x=1300, y=725)
-                tk.Label(self, text=f'{wind_direction}', font=SmFONT).place(x=1300, y=755)
-                tk.Label(self, text=f'{dew_point}', font=SmFONT).place(x=1300, y=785)
-                tk.Label(self, text=f'{sun_rise}', font=SmFONT).place(x=1300, y=815)
-                tk.Label(self, text=f'{sun_set}', font=SmFONT).place(x=1300, y=845)
-                tk.Label(self, text=f'{civil_twi}', font=SmFONT).place(x=1300, y=875)
-                tk.Label(self, text=f'{astro_twi}', font=SmFONT).place(x=1300, y=905)
+                x = np.arange(-10, 10, 0.01)
+                y = x ** 2
+
+                weather_label_text = f'Temperature Current:     {tempature}\nWind Speed Current:       {wind_speed} \nHumidity Current:           {humidity}\nPressure Current:            {pressure}\nWind Direction:               {wind_direction}\nDew Point                      {dew_point}\nSunrise:                          {sun_rise}\nSunset:                           {sun_set}\nCivil Twilight:                  {civil_twi}\nAstro Twilight:                 {astro_twi}\n'
+                # adding text inside the plot
+                plt.text(-10, 0, weather_label_text , fontsize=24)
+
+
+                plt.plot(x, y, c='g', alpha=0)
+                plt.axis('off')
+                plt.savefig("wind_label_readout.png")
+
+
+            # runs the labels for the weather outputs
+            fig, ax = plt.subplots(figsize=(7, 6))
 
             create_labels()
+            def label_image():
+
+                img_label = Image.open("wind_label_readout.png")
+
+                # width, height = img_arrow.size
+                # img_arrow = img_arrow.crop([1, 1, 1, 1])
+                img_label = img_label.resize((450, 350))
+
+                self.image_label = ImageTk.PhotoImage(img_label)
+
+                img_but = tk.Button(self, text='Click Me !', image=self.image_label)
+                img_but.place(x=875, y=575)
+
+                canvas.after(refresh_rate, label_image)
+
+            label_image()
 
             ################### Wind direction arrows #################
             # def to make the angle and all the other information on the plot
@@ -473,6 +511,8 @@ class StartPage(tk.Frame):
                 ax.add_patch(high_speed)
 
                 plt.savefig('wind_direction.png')
+                fig3.clear()  # clear the plot
+                fig3.clf()
 
             # runs the arrow plotting
             angle = wind_direction
@@ -503,21 +543,22 @@ class StartPage(tk.Frame):
             canvas.after(refresh_rate, make_plots_and_labels, weather_data_location) # refreshs the system after some time
 
         #################### End of Wind direction arrows ###################################
-        fig = plt.figure(1)  # the one figure used to make all the weather data plots
+
         make_plots_and_labels(weather_data_location) # Rund the plots and labels
 
-        # takes a screenshot of part of the screen NO SET CORRECTLY AS IT WILL BE DIFFERENT ON THE GATECH COMPUTER
-        # JUST NEEDS TO BE PLAYEd WITH
-        def take_screen_capture():
-            im = ImageGrab.grab(bbox=(400, 200, 1000, 1000))
-
-            im.save('Weather_readout_screenshot.png')
-
-        try:
-            take_screen_capture()
-        except:
-            print('unable to take screenshot')
-        canvas.after(refresh_rate, take_screen_capture)
+        # the screeenshot has been removed as a graph would be better
+        # # takes a screenshot of part of the screen NO SET CORRECTLY AS IT WILL BE DIFFERENT ON THE GATECH COMPUTER
+        # # JUST NEEDS TO BE PLAYEd WITH
+        # def take_screen_capture():
+        #     im = ImageGrab.grab(bbox=(400, 200, 1000, 1000))
+        #
+        #     im.save('Weather_readout_screenshot.png')
+        #
+        # try:
+        #     take_screen_capture()
+        # except:
+        #     print('unable to take screenshot')
+        # canvas.after(refresh_rate, take_screen_capture)
 
 
 # second window frame page1
