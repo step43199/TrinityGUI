@@ -312,7 +312,7 @@ class StartPage(tk.Frame):
         ####### Updating Labels from the weather station ###############
 
         list_of_files = glob.glob(WXDIR + '*_*')  # * means all if need specific format then *.csv
-        latest_file = min(list_of_files, key=os.path.getctime)  # gets the latest weather data file
+        latest_file = max(list_of_files, key=os.path.getctime)  # gets the latest weather data file
         weather_data_location = latest_file
 
         # print(latest_file) # checks which file is being read in
@@ -347,7 +347,7 @@ class StartPage(tk.Frame):
                     temp = str(date_n_time[i])
                     date[i] = datetime.datetime.strptime(temp[:19], "%Y-%m-%dT%H:%M:%S")
 
-                print(date)
+                #print(date)
                 # a def to make the plot format for each weather plot
 
                 def plot_format(x, y, xlabel, ylabel, title, color, fig, thick=1):
@@ -421,7 +421,7 @@ class StartPage(tk.Frame):
                 # tk.Label(self, text=f'{sun_set}', font=SmFONT).place(x=1300, y=845)
                 # tk.Label(self, text=f'{civil_twi}', font=SmFONT).place(x=1300, y=875)
                 # tk.Label(self, text=f'{astro_twi}', font=SmFONT).place(x=1300, y=905)
-
+                fig = plt.figure(figsize=(7, 6))
                 x = np.arange(-10, 10, 0.01)
                 y = x ** 2
 
@@ -433,12 +433,13 @@ class StartPage(tk.Frame):
                 plt.plot(x, y, c='g', alpha=0)
                 plt.axis('off')
                 plt.savefig("wind_label_readout.png")
+                plt.close()
 
-
-            # runs the labels for the weather outputs
-            fig, ax = plt.subplots(figsize=(7, 6))
+                # runs the labels for the weather outputs
 
             create_labels()
+
+
             def label_image():
 
                 img_label = Image.open("wind_label_readout.png")
@@ -455,6 +456,7 @@ class StartPage(tk.Frame):
                 canvas.after(refresh_rate, label_image)
 
             label_image()
+
 
             ################### Wind direction arrows #################
             # def to make the angle and all the other information on the plot
