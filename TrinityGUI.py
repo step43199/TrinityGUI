@@ -421,7 +421,7 @@ class StartPage(tk.Frame):
                 # tk.Label(self, text=f'{sun_set}', font=SmFONT).place(x=1300, y=845)
                 # tk.Label(self, text=f'{civil_twi}', font=SmFONT).place(x=1300, y=875)
                 # tk.Label(self, text=f'{astro_twi}', font=SmFONT).place(x=1300, y=905)
-                fig = plt.figure(figsize=(7, 6))
+                plt.figure(figsize=(7, 6))
                 x = np.arange(-10, 10, 0.01)
                 y = x ** 2
 
